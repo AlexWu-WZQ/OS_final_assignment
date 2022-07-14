@@ -522,27 +522,26 @@ void openFile(int currentUserID)
 }
 
 //关闭文件
-void closeFile(int currentUserID)
+void closeFile()
 {
-    int i;
     char fileName[10];
     while(1)
     {
         printf("请输入文件名：");
         scanf("%s", fileName);
         //将文件从运行文件列表中删除
-        for (int j = 0; j < 5; j++) {
-            if (strcmp(AFD[j].openFileName, fileName) == 0) {
-                strcpy(AFD[j].openFileName, "XXX");
-                AFD[j].flag = 0;
+        for (int i = 0; i < 5; i++) {
+            if (strcmp(AFD[i].openFileName, fileName) == 0) {
+                strcpy(AFD[i].openFileName, "XXX");
+                AFD[i].flag = 0;
                 for(int k=0;k<3;k++)
                 {
-                    AFD[j].openFileProtectCode[k] = 0;
+                    AFD[i].openFileProtectCode[k] = 0;
                 }
-                AFD[j].rwPoint = 0;
+                AFD[i].rwPoint = 0;
                 printf("文件关闭成功！\n");
                 break;
-            } else if (j == 4) {
+            } else if (i == 4) {
                 printf("文件不在运行文件列表中，请检查！\n");
                 break;
             }
@@ -637,7 +636,7 @@ int main() {
         } else if (strcmp(command, "open") == 0) {
             openFile(currentUserID);
         } else if (strcmp(command, "close") == 0) {
-            closeFile(currentUserID);
+            closeFile();
         } else if (strcmp(command, "read") == 0) {
             readFile();
         } else if (strcmp(command, "write") == 0) {
